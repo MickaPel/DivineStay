@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'vt323regular';
+    src: url('Font/vt323-regular-webfont.woff2') format('woff2'),
+         url('Font/vt323-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+.typing_effect_cursor::after {
+    content: "";
+    position: absolute;
+    margin-top: 0px;
+    height: 3.5vh;
+    border-right: 0.47vw solid #18c701;
+    animation: blink 1s infinite ease;
+    /* float:left; */
+    text-align: left;
+}
+
+/* body {
+    font-family: 'vt323regular';
+    font-size: 30px;
+    color:  #18c701;
+} */

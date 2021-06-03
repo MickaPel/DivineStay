@@ -1,0 +1,47 @@
+.slide-container {
+  width: 380px;
+  margin: auto;
+}
+
+.slide-container img {
+  height: 200px;
+
+}
+
+.aws-btn {
+
+  --slider-height-percentage: 60%;
+--slider-transition-duration: 700ms;
+--organic-arrow-thickness: 4px;
+--organic-arrow-border-radius: 0px;
+--organic-arrow-height: 12px;
+--organic-arrow-color: #ffffff;
+--control-button-width: 10%;
+--control-button-height: 25%;
+--control-button-background: transparent;
+--control-bullet-color: #fafafa;
+--control-bullet-active-color: #ffffff;
+--loader-bar-color: transparent;
+--loader-bar-height: 6px;
+  width: 380px;
+  margin: auto;
+  }
+
+  .aws-btn1 {
+
+    --slider-height-percentage: 65%;
+  --slider-transition-duration: 700ms;
+  /* --organic-arrow-thickness: 4px;
+  --organic-arrow-border-radius: 0px;
+  --organic-arrow-height: 12px;
+  --organic-arrow-color: #ffffff; */
+  --control-button-width: 10%;
+  --control-button-height: 25%;
+  --control-button-background: transparent;
+  --control-bullet-color: #fafafa;
+  --control-bullet-active-color: #ffffff;
+  --loader-bar-color: transparent;
+  --loader-bar-height: 6px;
+    width: 700px;
+    margin: auto;
+    }
