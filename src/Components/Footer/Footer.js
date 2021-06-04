@@ -77,6 +77,9 @@ export default function Footer () {
                                         <Typography component="h6">
                                             &copy; DivineStay, 2021
                                         </Typography>
+                                        <Typography component="h6">
+                                            &copy; DivineStay, 2021
+                                        </Typography>
                                     </Grid>
                                 </Paper>
                             </div>
