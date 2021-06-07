@@ -1,63 +1,59 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { Link } from "react-router-dom";
 import firebaseContext from "../firebase/context";
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-// import { config } from "../firebase/firebase";
-// import Firebase from "../firebase/firebase";
-import app from "firebase/app";
+// import useMediaQuery from '@material-ui/core/useMediaQuery';
+// // import { config } from "../firebase/firebase";
+// // import Firebase from "../firebase/firebase";
+// import app from "firebase/app";
 
-import AppBar from '@material-ui/core/AppBar';
+// import AppBar from '@material-ui/core/AppBar';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import PropTypes from 'prop-types';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Box from '@material-ui/core/Box';
-import SwipeableViews from 'react-swipeable-views';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Button from '@material-ui/core/Button';
+// import PropTypes from 'prop-types';
+// import Tabs from '@material-ui/core/Tabs';
+// import Tab from '@material-ui/core/Tab';
+// import Box from '@material-ui/core/Box';
+// import SwipeableViews from 'react-swipeable-views';
+import Paper from '@material-ui/core/Paper';
 
 import Logout from "../Logout/Logout";
 // import { unstable_renderSubtreeIntoContainer } from 'react-dom';
 import BackGround from "../Images/stars01.jpg";
 
 
-function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-    return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`full-width-tabpanel-${index}`}
-            aria-labelledby={`full-width-tab-${index}`}
-            {...other}
-        >
-            {value === index && (
-            <Box p={3}>
-                <Typography>{children}</Typography>
-            </Box>
-            )}
-        </div>
-    );
-    }
+// function TabPanel(props) {
+//     const { children, value, index, ...other } = props;
+//     return (
+//         <div
+//             role="tabpanel"
+//             hidden={value !== index}
+//             id={`full-width-tabpanel-${index}`}
+//             aria-labelledby={`full-width-tab-${index}`}
+//             {...other}
+//         >
+//             {value === index && (
+//             <Box p={3}>
+//                 <Typography>{children}</Typography>
+//             </Box>
+//             )}
+//         </div>
+//     );
+//     }
     
-    TabPanel.propTypes = {
-        children: PropTypes.node,
-        index: PropTypes.any.isRequired,
-        value: PropTypes.any.isRequired,
-    };
+//     TabPanel.propTypes = {
+//         children: PropTypes.node,
+//         index: PropTypes.any.isRequired,
+//         value: PropTypes.any.isRequired,
+//     };
 
-function a11yProps(index) {
-    return {
-        id: `vertical-tab-${index}`,
-        'aria-controls': `vertical-tabpanel-${index}`,
-    };
-}
+// function a11yProps(index) {
+//     return {
+//         id: `vertical-tab-${index}`,
+//         'aria-controls': `vertical-tabpanel-${index}`,
+//     };
+// }
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -70,8 +66,13 @@ const useStyles = makeStyles((theme) => ({
         backgroundPosition: "center"
     },
     root1: {
-        backgroundColor: "#34656d",
-        width: "80%",
+        // backgroundColor: "#34656d",
+        // width: "80%",
+        marginTop: 40
+    },
+    paper: {
+        width: "60%",
+        backgroundColor: "#34656d"
     },
     large: {
         width: theme.spacing(15),
@@ -89,19 +90,17 @@ export default function Profile(props) {
 
     const classes = useStyles();
 
-    const theme = useTheme();
-
     const firebase = useContext(firebaseContext);
 
-    const [value, setValue] = useState(0);
+    // const [value, setValue] = useState(0);
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
+    // const handleChange = (event, newValue) => {
+    //     setValue(newValue);
+    // };
 
-    const handleChangeIndex = (index) => {
-        setValue(index);
-    };
+    // const handleChangeIndex = (index) => {
+    //     setValue(index);
+    // };
 
     const [userSession, setUserSession] = useState(null);
     const [userData, setUserData] = useState({});
@@ -130,18 +129,16 @@ export default function Profile(props) {
         };
     }, [userSession, props.history, firebase])
 
-    // console.log(userData);
+    // const matches2 = useMediaQuery('(min-width:900px)');
 
-    const matches2 = useMediaQuery('(min-width:900px)');
+    // const Style = {
+    //     width: 375,
+    //     backgroundColor: "#34656d",
+    // };
 
-    const Style = {
-        width: 375,
-        backgroundColor: "#34656d",
-    };
-
-    const db = app.firestore();
-    // const storage = app.storage();
-    var docRef = db.collection("users").doc("username");
+    // const db = app.firestore();
+    // // const storage = app.storage();
+    // var docRef = db.collection("users").doc("username");
 //     const [data, setData] = useState([]);
 //     useEffect(() => { 
 //         docRef.get().then((doc) => {
@@ -157,19 +154,19 @@ export default function Profile(props) {
 //     });
 // })
     
-    const firebaseData = firebase.data();
+    // const firebaseData = firebase.data();
 
     // const app = Firebase.data();
-    const [fileUrl, setFileUrl] = useState(null);
-    const [users, setUsers] = useState([]);
+    // const [fileUrl, setFileUrl] = useState(null);
+    // const [users, setUsers] = useState([]);
 
-    const onFileChange = async (e) => {
-        const file = e.target.files[0]
-        const storageRef = app.storage().ref()
-        const fileRef = storageRef.child(file.name)
-        await fileRef.put(file)
-        setFileUrl(await fileRef.getDownloadURL())
-    };
+    // const onFileChange = async (e) => {
+    //     const file = e.target.files[0]
+    //     const storageRef = app.storage().ref()
+    //     const fileRef = storageRef.child(file.name)
+    //     await fileRef.put(file)
+    //     setFileUrl(await fileRef.getDownloadURL())
+    // };
 
     // const onSubmit = (e) => {
     //     e.preventDefault()
@@ -182,39 +179,42 @@ export default function Profile(props) {
     //         avatar: fileUrl
     //     })
     // }
-    const onSubmit = (e) => {
-        e.preventDefault()
-        db.collection("user").doc(fileUrl).set({
-            avatar: fileUrl
-        })
+    // const onSubmit = (e) => {
+    //     e.preventDefault()
+    //     db.collection("user").doc(fileUrl).set({
+    //         avatar: fileUrl
+    //     })
         
-    }
-    const onSubmit1 = (e) => {
-        e.preventDefault()
-        // db.collection("user").doc(fileUrl).set({
-        //     avatar: fileUrl
-        // })
-        if (!!userSession) {
-        firebase.user(userSession.uid)
-        .get()
-        .then( () => {
-            return db.collection("user").doc(fileUrl).set({
-                avatar: fileUrl
-            })
-        })
-    }
+    // }
+    // const onSubmit1 = (e) => {
+    //     e.preventDefault()
+    //     // db.collection("user").doc(fileUrl).set({
+    //     //     avatar: fileUrl
+    //     // })
+    //     if (!!userSession) {
+    //     firebase.user(userSession.uid)
+    //     .get()
+    //     .then( () => {
+    //         return db.collection("user").doc(fileUrl).set({
+    //             avatar: fileUrl
+    //         })
+    //     })
+    // }
         
-    }
+    // }
 
-    useEffect(() => {
-        const fetchUsers = async () => {
-            const usersCollection = await db.collection("user").get()
-            setUsers(usersCollection.docs.map(doc => {
-                return doc.data()
-            }))
-        }
-        fetchUsers()
-    }, [])
+    // useEffect(() => {
+    //     const fetchUsers = async () => {
+    //         const usersCollection = await db.collection("user").get()
+    //         setUsers(usersCollection.docs.map(doc => {
+    //             return doc.data()
+    //         }))
+    //     }
+    //     fetchUsers()
+    // }, [])
+
+
+
 
     // console.log(fetchUsers);
     
@@ -298,8 +298,10 @@ export default function Profile(props) {
                             Upload
                             </Button>
                         </label> */}
+
+
                         
-                            {users.map((user) => {
+                            {/* {users.map((user) => {
                                 return(
                                     <li key={user.name}>
                                         <Avatar justify="center" src={user.avatar} alt="image tag" className={classes.large} />
@@ -307,30 +309,15 @@ export default function Profile(props) {
                                         </li>
                                 )
                             })}
-
-                        {/* <form onSubmit={onSubmit}>
-                            <input type="file" onChange={onFileChange} />
-                            <input type="text" name="username" placeholder="name" />
-                            <button>Submit</button>
-                        </form> */}
                         <form onSubmit={onSubmit1}>
                             <input type="file" onChange={onFileChange} 
                             id="contained-button-file"
                             multiple/>
                             <button variant="contained" color="primary" component="span">Upload image</button>
-                        </form>
-
-                        {/* <form onSubmit={handleFireBaseUpload}>
-                            <input 
-                            type="file"
-                            onChange={handleImageAsFile}
-                            />
-                            <button>upload to firebase</button>
-                        </form>
-                        <img src={imageAsUrl.imgUrl} alt="image tag" /> */}
+                        </form> */}
 
 
-                    {/* <Avatar justify="center" src={users.avatar} alt="Remy Sharp" className={classes.large} /> */}
+                    <Avatar justify="center" src="/static/images/avatar/1.jpg" alt="Remy Sharp" className={classes.large} />
                     <Typography gutterBottom variant="h5" component="h2" className={classes.pseudo}>
                         {userData.pseudo}
                     </Typography>
@@ -339,8 +326,20 @@ export default function Profile(props) {
                         justify="center" 
                         alignItems="center" 
                         direction="column"
-                        className={classes.root1}>
-                            <AppBar position="static" style={{ background: "#30475e" }}>
+                        className={classes.root1}
+                        >
+                            <Paper elevation={3} className={classes.paper}>
+                                <Typography variant='h5' style={{ color: "#e1701a" }}>
+                                    Informations du compte:
+                                </Typography>
+                                <Typography component="h6" style={{ color: "#ffcd3c", marginTop: 10 }}>
+                                    E-Mail: {userData.email}
+                                </Typography>
+                                <Typography component="h6" style={{ color: "#ffcd3c" }}>
+                                    Pseudo: {userData.pseudo}
+                                </Typography>
+                            </Paper>
+                            {/* <AppBar position="static" style={{ background: "#30475e" }}>
                                 <Tabs
                                 value={value}
                                 onChange={handleChange}
@@ -374,48 +373,7 @@ export default function Profile(props) {
                                 <TabPanel value={value} index={2} dir={theme.direction}>
                                     Item Three
                                 </TabPanel>
-                            </SwipeableViews>
-                    {/* <Accordion>
-                        <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
-                        >
-                        <Typography className={classes.heading}>Informations</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                        <Typography>
-                            E-Mail: {userData.email}
-                        </Typography>
-                        <Typography>
-                            Pseudo: {userData.pseudo}
-                        </Typography>
-                        </AccordionDetails>
-                    </Accordion>
-                    <Accordion>
-                        <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel2a-content"
-                        id="panel2a-header"
-                        >
-                        <Typography className={classes.heading}>Mes Commandes</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                        <Typography>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                            sit amet blandit leo lobortis eget.
-                        </Typography>
-                        </AccordionDetails>
-                    </Accordion>
-                    <Accordion>
-                        <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel3a-content"
-                        id="panel3a-header"
-                        >
-                        <Typography className={classes.heading}>Modes de paiement</Typography>
-                        </AccordionSummary>
-                    </Accordion> */}
+                            </SwipeableViews> */}
                 </Grid>
                 </Grid>
             </div>

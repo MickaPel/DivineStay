@@ -4,6 +4,7 @@ import {useParams} from "react-router-dom";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../../Redux/Products/actionProducts";
+import { Link } from "react-router-dom";
 
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -13,6 +14,9 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
+import Popover from '@material-ui/core/Popover';
+import CardActions from '@material-ui/core/CardActions';
+import CardActionArea from '@material-ui/core/CardActionArea';
 
 
 import AwesomeSlider from 'react-awesome-slider';
@@ -124,7 +128,7 @@ const currencies = [
     }
   ];
 
-  export default function ShopCard() {
+  export default function ShopCard(props) {
   const classes = useStyles();
 
   const [productsNumber, setProductsNumber] = useState(1);
@@ -137,8 +141,6 @@ const currencies = [
 
   const thisProduct = productsData.find(prod => prod.name === productId);
   const name = thisProduct.name;
-
-  console.log(thisProduct);
 
   const [restTravels, setRestTravels] = useState(11);
 
@@ -154,6 +156,19 @@ const currencies = [
   
   const dispatch = useDispatch();
 
+  const onClick = (event) => {
+    dispatch(addToCart(thisProduct.id, productsNumber));
+    // props.history.push("/offers-page");
+    setAnchorEl1(event.currentTarget)
+  }
+
+  const [anchorEl1, setAnchorEl1] = useState(null);
+    const open1 = Boolean(anchorEl1);
+    const id1 = open1 ? 'simple-popover' : undefined;
+
+    const handleClose1 = () => {
+        setAnchorEl1(null);
+    };
 
   return (
     <div className={classes.root}>
@@ -228,11 +243,58 @@ const currencies = [
                         variant="contained" 
                         color="primary" 
                         style={{backgroundColor: '#c24914', color: "#bbbbbb", fontSize: 20}}
-                        onClick={() => dispatch(addToCart(thisProduct.id, productsNumber))}
+                        onClick={onClick}
                                         >
                           Ajouter au panier
                       </Button>
                   </Grid>
+                  <Popover
+                    id={id1}
+                    open={open1}
+                    anchorEl={anchorEl1}
+                    onClose={handleClose1}
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                    }}
+                    transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                    }}>
+                        <Card className={classes.popup2} style={{backgroundColor: "#ffb26b"}}>
+                            <CardActionArea>
+                                <CardContent>
+                                    <Typography component="h6" style={{color: "#564a4a"}}>
+                                        Vous venez de réserver un séjour pour {name}. 
+                                    </Typography>
+                                </CardContent>
+                            </CardActionArea>
+                            <CardActions>
+                            <Grid   container
+                                    direction="row"
+                                    justify="space-around"
+                                    alignItems="center">
+                                <Button variant="outlined" 
+                                        size="medium" 
+                                        color="secondary" 
+                                        style={{color: "#810000"}}
+                                        component={ Link } 
+                                        to="/offers-page">
+                                Retour aux offres
+                                </Button>
+                                <Button variant="outlined" 
+                                        size="medium" 
+                                        color="primary" 
+                                        style={{color: "#150e56"}}
+                                        component={ Link } 
+                                        to="/shopping-cart">
+                                Voir le panier
+                                </Button>
+                            </Grid>
+                            </CardActions>
+                        </Card>
+                        
+            </Popover>
               </Grid>
 
             </CardContent>

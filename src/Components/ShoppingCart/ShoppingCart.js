@@ -18,7 +18,6 @@ import TextField from '@material-ui/core/TextField';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Popover from '@material-ui/core/Popover';
 import MenuItem from '@material-ui/core/MenuItem';
-import Popper from '@material-ui/core/Popper';
 
 import ShoppingCartItem from "././ShoppingCartItem/ShoppingCartItem";
 
@@ -228,7 +227,7 @@ export default function MaterialTableDemo() {
 
     const [userSession, setUserSession] = useState(null);
 
-    let listener = firebase.auth.onAuthStateChanged(user => {
+    const listener = firebase.auth.onAuthStateChanged(user => {
         setUserSession(user);
     })
 
@@ -240,14 +239,14 @@ export default function MaterialTableDemo() {
         setAnchorEl1(null);
     };
 
-    const [anchorEl2, setAnchorEl2] = React.useState(null);
+    // const [anchorEl2, setAnchorEl2] = React.useState(null);
 
-    const handleClick2 = (event) => {
-    setAnchorEl(anchorEl ? null : event.currentTarget);
-    };
+    // const handleClick2 = (event) => {
+    // setAnchorEl(anchorEl ? null : event.currentTarget);
+    // };
 
-    const open2 = Boolean(anchorEl2);
-    const id2 = open2 ? 'simple-popper' : undefined;
+    // const open2 = Boolean(anchorEl2);
+    // const id2 = open2 ? 'simple-popper' : undefined;
 
     const handleClick = (event) => {
         if(userSession === null) {
@@ -381,8 +380,6 @@ export default function MaterialTableDemo() {
 
 
             {showCard === false ? (
-                // <div className={classes.root1}>
-                // </div>
                 <span></span>
             ):(
                 <Card className={classes.card}>

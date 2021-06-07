@@ -9,13 +9,9 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import IconButton from '@material-ui/core/IconButton';
-import MenuItem from '@material-ui/core/MenuItem';
-
-import Background from "../../Images/VoieLactée.jpg";
 
 
 
@@ -41,21 +37,6 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const currencies = [
-    {
-        value: 1
-    },
-    {
-        value: 2
-    },
-    {
-        value: 3
-    },
-    {
-        value: 4
-    }
-];
-
 export default function MaterialTableDemo({ productData }) {
     const classes = useStyles();
 
@@ -67,10 +48,10 @@ export default function MaterialTableDemo({ productData }) {
     const dispatch = useDispatch();
 
     const [input, setInput] = useState(productData.qty);
-    const [productsNumber, setProductsNumber] = useState(1);
+    // const [productsNumber, setProductsNumber] = useState(1);
 
     const onChangeHandler1 = (e) => {
-        setProductsNumber(e.target.value);
+        // setProductsNumber(e.target.value);
         setInput(e.target.value);
         dispatch(adjustQuantity(productData.id, e.target.value));
     }
@@ -100,22 +81,19 @@ export default function MaterialTableDemo({ productData }) {
                     direction="row"
                     justify="center"
                     alignItems="center">
-            <TextField
-                        className={classes.input}
-                        id="standard-select-currency"
-                        select
-                        variant="outlined"
-                        label="Voyageurs"
-                        value={productsNumber}
+                    <input
+                        min="1"
+                        type="number"
+                        id="qty"
+                        name="qty"
+                        value={input}
                         onChange={onChangeHandler1}
-                        // helperText="Le nombre de passagers"
-            >
-                        {currencies.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>
-                                {option.value}
-                            </MenuItem>
-                        ))}
-            </TextField>
+                        style={{width: 35,
+                            height: 25,
+                            borderRadius: 10,
+                            border: "1 solid",
+                            outline: "none"}}
+                    />
             <Typography component="h6" className={classes.typographyQty}>
                 {quantity} 
             </Typography>

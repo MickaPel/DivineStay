@@ -77,37 +77,12 @@ export default function Footer () {
                                         <Typography component="h6">
                                             &copy; DivineStay, 2021
                                         </Typography>
-                                        <Typography component="h6">
-                                            &copy; DivineStay, 2021
-                                        </Typography>
                                     </Grid>
                                 </Paper>
                             </div>
 
     return (
-        // <div className={classes.root}>
-        //     <Paper className={classes.footer}>
-        //         <Grid
-        //         container
-        //         direction="row"
-        //         justify="space-between"
-        //         alignItems="center"
-        //         >
-        //             <Typography component="h6">
-        //                 DivineStay@gmail.com
-        //             </Typography>
-        //             <Typography component="h6">
-        //                 "Le voyage est le printemps du coeur."
-        //             </Typography>
-        //             <Typography component="h6">
-        //                 &copy; DivineStay, 2021
-        //             </Typography>
-        //         </Grid>
-        //     </Paper>
-            
-        // </div>
-        <div>{grid}</div>
-        
+        <div>{grid}</div> 
     );
 };
 
