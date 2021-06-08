@@ -14,8 +14,14 @@ import 'react-awesome-slider/dist/styles.css';
 
 import Background from "../Images/BackStars1.jpg";
 
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+// // import { Carousel } from "react-responsive-carousel";
+// import "react-responsive-carousel/lib/styles/carousel.min.css";
+
+// import Carousel, { autoplayPlugin } from '@brainhubeu/react-carousel';
+// import '@brainhubeu/react-carousel/lib/style.css';
+
+import Slider from 'infinite-react-carousel';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -64,6 +70,13 @@ export default function HeavenHellTravel(props) {
 
   const heavenOffers = offers.filter(categorie => categorie.categorie === "Heaven");
 
+  const settings =  {
+    arrows: false,
+    arrowsBlock: false,
+    autoplay: true,
+    duration: 500
+  };
+
   return (
     <div className={classes.root}>
       <MuiThemeProvider theme={theme}>
@@ -72,37 +85,31 @@ export default function HeavenHellTravel(props) {
               alignItems="center" 
               direction="column">
             {Array.isArray(heavenOffers) &&
-                      heavenOffers.map(forecast => (                          
-                <Card className={classes.paper}
-                    style={{backgroundColor: "#e5e5e5"}}>
-                  <CardActionArea>
-                  <Link to={`/shop-card/${forecast.name}`} style={{ textDecoration: "none" }}>
-                    <div>
-                        <Carousel 
-                            autoPlay 
-                            showThumbs={false} 
-                            infiniteLoop={true} 
-                            showStatus={false} 
-                            transitionTime={2000}>
-                                <div>
-                                  <img alt="" src={forecast.image1} height={"250"}/>
-                                </div>
-                                <div>
-                                  <img alt="" src={forecast.image2} height={"250"}/>
-                                </div>
-                                <div>
-                                  <img alt="" src={forecast.image3} height={"250"}/>
-                                </div>
-                        </Carousel>
-                    </div>
-                    <CardContent>   
-                      <Typography gutterBottom variant="h5" component="h2" className={classes.title}>
-                        {forecast.name}
-                      </Typography>   
-                    </CardContent>
-                    </Link>
-                  </CardActionArea>
-                </Card>
+                      heavenOffers.map(forecast => (
+                        <div key={forecast.id} className={classes.paper}>                          
+                          <Card style={{backgroundColor: "#e5e5e5"}}>
+                            <CardActionArea>
+                              <Link to={`/shop-card/${forecast.name}`} style={{ textDecoration: "none" }}>
+                                <Slider { ...settings }>
+                                    <div>
+                                      <img alt="" src={forecast.image1} height={"250"} width={400}/>
+                                    </div>
+                                    <div>
+                                      <img alt="" src={forecast.image2} height={"250"} width={400}/>
+                                    </div>
+                                    <div>
+                                      <img alt="" src={forecast.image3} height={"250"} width={400}/>
+                                    </div>
+                                </Slider>
+                              <CardContent>   
+                                <Typography gutterBottom variant="h5" component="h2" className={classes.title}>
+                                  {forecast.name}
+                                </Typography>   
+                              </CardContent>
+                              </Link>
+                            </CardActionArea>
+                          </Card>
+                </div>
             ))}
         </Grid>
       </MuiThemeProvider>
