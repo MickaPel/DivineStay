@@ -227,9 +227,9 @@ export default function MaterialTableDemo() {
 
     const [userSession, setUserSession] = useState(null);
 
-    const listener = firebase.auth.onAuthStateChanged(user => {
-        setUserSession(user);
-    })
+    // const listener = firebase.auth.onAuthStateChanged(user => {
+    //     setUserSession(user);
+    // })
 
     const [anchorEl1, setAnchorEl1] = useState(null);
     const open1 = Boolean(anchorEl1);
@@ -249,6 +249,9 @@ export default function MaterialTableDemo() {
     // const id2 = open2 ? 'simple-popper' : undefined;
 
     const handleClick = (event) => {
+        firebase.auth.onAuthStateChanged(user => {
+            setUserSession(user);
+        })
         if(userSession === null) {
                 setAnchorEl1(event.currentTarget)
         } else {
@@ -272,7 +275,6 @@ export default function MaterialTableDemo() {
     const [formData, setFormData] = useState([]);
 
     const onSubmit = (data) => {
-        console.log(data);
         setFormData(data);
     };
     
@@ -297,11 +299,11 @@ export default function MaterialTableDemo() {
                 Récapitulatif de vos réservations
             </Typography>
 
-            <Typography variant="h5">
-                {cartItem.map((item) => (
-                    <ShoppingCartItem key={item.id} productData={item} />
-                ))}
-            </Typography>
+                <Typography variant="h5">
+                    {cartItem.map((item) => (
+                        <ShoppingCartItem key={item.id} productData={item} />
+                    ))}
+                </Typography>
 
             <Card className={classes.card}>
                 <CardContent>
@@ -398,14 +400,12 @@ export default function MaterialTableDemo() {
                                         className={classes.textfield1}
                                         name="firstName"
                                         {...register("name", { required: true })}/>
-                            <TextField  id="outlined-basic" 
-                                        label="Adresse mail" 
+                            <TextField  label="Adresse mail" 
                                         variant="outlined"
                                         className={classes.textfield}
                                         type="email"
                                         {...register("email", { required: true })}/>
-                            <TextField  id="outlined-basic" 
-                                        label="Adresse" 
+                            <TextField  label="Adresse" 
                                         variant="outlined"
                                         className={classes.textfield}
                                         type="text"
@@ -440,6 +440,7 @@ export default function MaterialTableDemo() {
                                 variant="outlined"
                                 label="Month"
                                 select
+                                defaultValue=""
                                 {...register("expire month", { required: true})}
                             >
                                 <MenuItem value="">
@@ -456,6 +457,7 @@ export default function MaterialTableDemo() {
                                 <MenuItem value="October">October</MenuItem>
                                 <MenuItem value="November">November</MenuItem>
                                 <MenuItem value="December">December</MenuItem>
+                                
                             </TextField>
                             <TextField
                                 variant="outlined"
@@ -463,6 +465,7 @@ export default function MaterialTableDemo() {
                                 {...register("expire year", { required: true})}
                                 className={classes.textfield2}
                                 select
+                                defaultValue=""
                             >
                                 <MenuItem value="">
                                 </MenuItem>
@@ -472,6 +475,7 @@ export default function MaterialTableDemo() {
                                 <MenuItem value={2024}>2024</MenuItem>
                                 <MenuItem value={2025}>2025</MenuItem>
                                 <MenuItem value={2026}>2026</MenuItem>
+                                
                             </TextField>                               
                             </Grid>
                             <TextField  id="outlined-basic" 
@@ -534,7 +538,8 @@ export default function MaterialTableDemo() {
                                         <Typography variant="body2" color="textSecondary" component="p">
                                             Adresse: {formData.address}, {formData.city}
                                         </Typography>
-                                        <Typography variant="body2" color="textSecondary" component="p">
+                                        {/* <div> */}
+                                        <Typography variant="body2" color="textSecondary" component={'span'}>
                                             Séjours réservés: 
                                             <ul>
                                             {cartItem.map((item) => (
@@ -542,7 +547,8 @@ export default function MaterialTableDemo() {
                                             ))}
                                                 
                                             </ul>
-                                        </Typography>   
+                                        </Typography>
+                                        {/* </div>    */}
                                         <Typography component="h6">
                                             Total: {totalPrice} €
                                         </Typography>

@@ -191,6 +191,7 @@ const currencies = [
                 cancelOnInteraction={false} // should stop playing on user interaction
                 interval={3000}
                 bullets={false}
+                // organicArrows={false}
               >
                 <div data-src={thisProduct.image1} />
                 <div data-src={thisProduct.image2} />

@@ -12,9 +12,9 @@
 
   --slider-height-percentage: 60%;
 --slider-transition-duration: 700ms;
---organic-arrow-thickness: 4px;
+--organic-arrow-thickness: 1px;
 --organic-arrow-border-radius: 0px;
---organic-arrow-height: 12px;
+--organic-arrow-height: 2px;
 --organic-arrow-color: #ffffff;
 --control-button-width: 10%;
 --control-button-height: 25%;
