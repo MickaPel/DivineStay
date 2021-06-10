@@ -227,9 +227,9 @@ export default function MaterialTableDemo() {
 
     const [userSession, setUserSession] = useState(null);
 
-    // const listener = firebase.auth.onAuthStateChanged(user => {
-    //     setUserSession(user);
-    // })
+    firebase.auth.onAuthStateChanged(user => {
+        setUserSession(user);
+    })
 
     const [anchorEl1, setAnchorEl1] = useState(null);
     const open1 = Boolean(anchorEl1);
@@ -249,9 +249,9 @@ export default function MaterialTableDemo() {
     // const id2 = open2 ? 'simple-popper' : undefined;
 
     const handleClick = (event) => {
-        firebase.auth.onAuthStateChanged(user => {
-            setUserSession(user);
-        })
+        // firebase.auth.onAuthStateChanged(user => {
+        //     setUserSession(user);
+        // })
         if(userSession === null) {
                 setAnchorEl1(event.currentTarget)
         } else {
@@ -478,16 +478,14 @@ export default function MaterialTableDemo() {
                                 
                             </TextField>                               
                             </Grid>
-                            <TextField  id="outlined-basic" 
-                                        label="MM / YY" 
+                            <TextField  label="MM / YY" 
                                         variant="outlined"
                                         className={classes.textfield}
                                         type="tel" 
                                         pattern="\d*" 
                                         inputProps={{ maxLength: 5 }}
                                         {...register("cardExpire", { required: true})} />
-                            <TextField  id="outlined-basic" 
-                                        label="CVC" 
+                            <TextField  label="CVC" 
                                         variant="outlined"
                                         className={classes.textfield}
                                         type="tel" 
@@ -543,7 +541,7 @@ export default function MaterialTableDemo() {
                                             Séjours réservés: 
                                             <ul>
                                             {cartItem.map((item) => (
-                                                <li>{item.name}</li>
+                                                <li key={item.name}>{item.name}</li>
                                             ))}
                                                 
                                             </ul>

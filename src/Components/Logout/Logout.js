@@ -71,7 +71,7 @@ export default function Logout() {
 
     useEffect(() => {
         if (checked !== true) {
-            console.log("deconexion");
+            // console.log("deconexion");
             firebase.signOutUser();
         }
     }, [checked, firebase]);
