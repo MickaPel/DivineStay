@@ -48,10 +48,8 @@ export default function MaterialTableDemo({ productData }) {
     const dispatch = useDispatch();
 
     const [input, setInput] = useState(productData.qty);
-    // const [productsNumber, setProductsNumber] = useState(1);
 
     const onChangeHandler1 = (e) => {
-        // setProductsNumber(e.target.value);
         setInput(e.target.value);
         dispatch(adjustQuantity(productData.id, e.target.value));
     }
@@ -107,7 +105,6 @@ export default function MaterialTableDemo({ productData }) {
                 alignItems="center">
             <IconButton 
                 edge="start" 
-                // className={classes.menuButton1} 
                 color="inherit" 
                 aria-label="menu"
                 onClick={() => dispatch(removeFromCart(productData.id))}>

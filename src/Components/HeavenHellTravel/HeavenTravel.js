@@ -14,12 +14,6 @@ import 'react-awesome-slider/dist/styles.css';
 
 import Background from "../Images/BackStars1.jpg";
 
-// // import { Carousel } from "react-responsive-carousel";
-// import "react-responsive-carousel/lib/styles/carousel.min.css";
-
-// import Carousel, { autoplayPlugin } from '@brainhubeu/react-carousel';
-// import '@brainhubeu/react-carousel/lib/style.css';
-
 import Slider from 'infinite-react-carousel';
 
 

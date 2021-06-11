@@ -38,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
         minWidth: 300,
         width: "100%",
         height: "100vh",
-        // backgroundColor: "black",
         backgroundImage: `url(${Background2})`,
         backgroundSize: "cover",
         backgroundPosition: "center"

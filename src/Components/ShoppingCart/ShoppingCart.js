@@ -200,7 +200,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function MaterialTableDemo() {
+export default function ShoppingCart() {
     const classes = useStyles();
 
     const cartItem = useSelector( state => state.cartItems.cart);
@@ -210,6 +210,7 @@ export default function MaterialTableDemo() {
     const [showCard, setShowCard] = useState(false);
 
     useEffect(() => {
+        let unmounted = false;
         let price = 0;
         let items = 0;
 
@@ -218,8 +219,12 @@ export default function MaterialTableDemo() {
             price += item.qty * item.price
         })
 
-        setTotalPrice(price);
+        if(! unmounted) {
+            setTotalPrice(price);
         setTotalItems(items);
+        }
+
+        return () => unmounted = false;
 
     }, [cartItem, totalPrice, totalItems, setTotalPrice, setTotalItems])
 
@@ -239,19 +244,7 @@ export default function MaterialTableDemo() {
         setAnchorEl1(null);
     };
 
-    // const [anchorEl2, setAnchorEl2] = React.useState(null);
-
-    // const handleClick2 = (event) => {
-    // setAnchorEl(anchorEl ? null : event.currentTarget);
-    // };
-
-    // const open2 = Boolean(anchorEl2);
-    // const id2 = open2 ? 'simple-popper' : undefined;
-
     const handleClick = (event) => {
-        // firebase.auth.onAuthStateChanged(user => {
-        //     setUserSession(user);
-        // })
         if(userSession === null) {
                 setAnchorEl1(event.currentTarget)
         } else {

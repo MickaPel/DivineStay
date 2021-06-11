@@ -89,8 +89,7 @@ return (
                     aria-label="vertical contained primary button group"
                     variant="contained"
                 >
-                    <Button 
-                            // variant="outlined" 
+                    <Button  
                             color="primary" 
                             component={ Link } 
                             to="/sign-up"
@@ -118,8 +117,6 @@ return (
             <TypingComponent
                 classString="assign-as-many classes-as-you-want here"
                 text1={textArrayOne}
-                //add text2 if you want self deleting effect after typing the first phrase
-                // text2={textArrayTwo}
                 typingContentElementId="give-your-component-an-element-id-to-reference"
                 styles={TypingComponentStyles1}
             />
