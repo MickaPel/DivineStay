@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useLayoutEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -209,22 +209,23 @@ export default function ShoppingCart() {
     const [totalItems, setTotalItems] = useState(0);
     const [showCard, setShowCard] = useState(false);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         let unmounted = false;
         let price = 0;
         let items = 0;
 
-        cartItem.forEach(item => {
-            items += item.qty;
-            price += item.qty * item.price
-        })
+        
 
-        if(! unmounted) {
+        if(!unmounted) {
+            cartItem.forEach(item => {
+                items += item.qty;
+                price += item.qty * item.price
+            })
             setTotalPrice(price);
-        setTotalItems(items);
+            setTotalItems(items);
         }
 
-        return () => unmounted = false;
+        return () => unmounted = true;
 
     }, [cartItem, totalPrice, totalItems, setTotalPrice, setTotalItems])
 
