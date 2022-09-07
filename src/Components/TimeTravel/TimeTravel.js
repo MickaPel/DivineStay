@@ -70,40 +70,40 @@ export default function TimeTravel(props) {
   return (
     <div className={classes.root}>
       <MuiThemeProvider theme={theme}>
-      <Grid 
-        container
-        direction="column"
-        justify="center"
-        alignItems="center"
-        >
-          {Array.isArray(timeOffers) &&
-                timeOffers.map(forecast => (
-                  <div key={forecast.id} className={classes.paper}>
-                    <Card style={{backgroundColor: "#e5e5e5"}}>
-                      <CardActionArea>
-                        <Link to={`/shop-card/${forecast.name}`} style={{ textDecoration: "none" }}>
-                          <Slider { ...settings }>
-                              <div>
-                                <img alt="" src={forecast.image1} height={"250"} width={400}/>
-                              </div>
-                              <div>
-                                <img alt="" src={forecast.image2} height={"250"} width={400}/>
-                              </div>
-                              <div>
-                                <img alt="" src={forecast.image3} height={"250"} width={400}/>
-                              </div>
-                          </Slider>
-                            <CardContent>
-                                <Typography gutterBottom variant="h5" component="h2" className={classes.title}>
-                                  {forecast.name}
-                                </Typography>
-                            </CardContent>
-                        </Link>
-                      </CardActionArea>
-                    </Card>
-              </div>
-          ))}
-      </Grid>
+        <Grid 
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
+          >
+            {Array.isArray(timeOffers) &&
+                  timeOffers.map(forecast => (
+                    <div key={forecast.id} className={classes.paper}>
+                      <Card style={{backgroundColor: "#E6D2AA"}}>
+                        <CardActionArea>
+                          <Link to={`/shop-card/${forecast.name}`} style={{ textDecoration: "none" }}>
+                            <Slider { ...settings }>
+                                <div>
+                                  <img alt="" src={forecast.image1} height={"250"} width={400}/>
+                                </div>
+                                <div>
+                                  <img alt="" src={forecast.image2} height={"250"} width={400}/>
+                                </div>
+                                <div>
+                                  <img alt="" src={forecast.image3} height={"250"} width={400}/>
+                                </div>
+                            </Slider>
+                              <CardContent>
+                                  <Typography gutterBottom variant="h5" component="h2" className={classes.title}>
+                                    {forecast.name}
+                                  </Typography>
+                              </CardContent>
+                          </Link>
+                        </CardActionArea>
+                      </Card>
+                </div>
+            ))}
+        </Grid>
       </MuiThemeProvider>
     </div>
   );

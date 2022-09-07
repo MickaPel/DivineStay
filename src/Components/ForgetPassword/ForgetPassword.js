@@ -61,9 +61,6 @@ const useStyles = makeStyles({
             color: "#6bc5d2"
         }
     },
-    pos: {
-        marginBottom: 12,
-    },
     link: {
         color: "#da9833"
     },
@@ -74,6 +71,7 @@ const useStyles = makeStyles({
 });
 
 export default function Login(props) {
+
     const classes = useStyles();
 
     const firebase = useContext(firebaseContext);
@@ -130,7 +128,7 @@ return (
                         disabled={email === "" ? true : false}
                         onClick={handleSubmit}
                         className={classes.button}>
-                            Réinitialiser le mot de passe
+                        Réinitialiser le mot de passe
                     </Button>
                 </CardActions>
                 <Link className={classes.link} to="/Login">Déjà inscrit? Connectez-vous</Link>

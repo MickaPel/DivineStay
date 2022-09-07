@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {useParams} from "react-router-dom";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -13,11 +13,9 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
 import Popover from '@material-ui/core/Popover';
 import CardActions from '@material-ui/core/CardActions';
 import CardActionArea from '@material-ui/core/CardActionArea';
-
 
 import AwesomeSlider from 'react-awesome-slider';
 import withAutoplay from 'react-awesome-slider/dist/autoplay';
@@ -25,7 +23,6 @@ import 'react-awesome-slider/dist/styles.css';
 import "../../Slider.css";
 
 import Background from "../Images/stars01.jpg";
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,9 +40,6 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 25,
     backgroundColor: "#1b262c"
   },
-  media: {
-    paddingTop: '56.25%', // 16:9
-  },
   desription: {
       marginTop: 50
   },
@@ -56,13 +50,6 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     fontFamily: 'Goldman',
     fontSize: 20
-  },
-  slider: {
-    paddingTop: 20,
-    width: 600,
-    height: 400,
-    marginLeft: "auto",
-    marginRight: "auto"
   },
   height: {
     height: 30
@@ -113,193 +100,141 @@ const theme = createMuiTheme({
     ].join(','),
   },});
 
-const currencies = [
-    {
-      value: 1
-    },
-    {
-      value: 2
-    },
-    {
-      value: 3
-    },
-    {
-      value: 4
-    }
-  ];
-
   export default function ShopCard(props) {
+  
   const classes = useStyles();
+  const AutoplaySlider = withAutoplay(AwesomeSlider);
 
   const [productsNumber, setProductsNumber] = useState(1);
-
-  const AutoplaySlider = withAutoplay(AwesomeSlider);
 
   const {productId} = useParams();
 
   const productsData = useSelector(state => state.cartItems.products);
+  const dispatch = useDispatch();
 
   const thisProduct = productsData.find(prod => prod.name === productId);
   const name = thisProduct.name;
 
-  const [restTravels, setRestTravels] = useState(11);
-
-    useEffect(() => {
-        let count = 11;
-        productsData.forEach((item) => {
-            count += item.qty;
-        });
-
-        setRestTravels(count);
-    }, [productsData, restTravels])
-
-  
-  const dispatch = useDispatch();
-
   const onClick = (event) => {
     dispatch(addToCart(thisProduct.id, productsNumber));
-    // props.history.push("/offers-page");
     setAnchorEl1(event.currentTarget)
   }
 
   const [anchorEl1, setAnchorEl1] = useState(null);
-    const open1 = Boolean(anchorEl1);
-    const id1 = open1 ? 'simple-popover' : undefined;
+  const open1 = Boolean(anchorEl1);
+  const id1 = open1 ? 'simple-popover' : undefined;
 
-    const handleClose1 = () => {
-        setAnchorEl1(null);
-    };
+  const handleClose1 = () => {
+    setAnchorEl1(null);
+  };
 
   return (
     <div className={classes.root}>
-
       <MuiThemeProvider theme={theme}>
-
-        <Grid
-          container
-          direction="row"
-          justify="center"
-          alignItems="center"
-        >
-
-          <Card className={classes.card}>
-            <CardContent>
-
-              <AutoplaySlider
-                className="aws-btn1"
-                play={true}
-                cancelOnInteraction={false} // should stop playing on user interaction
-                interval={3000}
-                bullets={false}
-                // organicArrows={false}
-              >
-                <div data-src={thisProduct.image1} />
-                <div data-src={thisProduct.image2} />
-                <div data-src={thisProduct.image3} />
-              </AutoplaySlider>
-
-              <Typography className={classes.height} variant="h4" component="p"></Typography>
-              <Typography className={classes.description} 
-              variant="h4" 
-              component="p" 
-              style={{color: "#ffc764"}}>
-                {name} 
-              </Typography>
-              <Typography className={classes.height} variant="h4" component="p"></Typography>
-              <Typography className={classes.description} 
-              variant="body2" 
-              component="p" 
-              style={{color: "#939b62"}}>
-                {thisProduct.description} 
-              </Typography>
-              <Typography className={classes.height} variant="h4" component="p"></Typography>
-
-              <Grid container spacing={3} direction="column" alignItems="center">
-                  <Grid item xs={12} sm={6}>
-                      <Paper className={classes.paper}>Durée: {thisProduct.duration}</Paper>
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                      <Paper className={classes.paper}>{thisProduct.price} €</Paper>
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                      <TextField
-                        className={classes.input}
-                        id="standard-select-currency"
-                        select
-                        variant="outlined"
-                        label="Choisir"
-                        value={productsNumber}
-                        onChange={ e => setProductsNumber(e.target.value)}
-                        helperText="Le nombre de passagers"
-                      >
-                        {currencies.map((option) => (
-                          <MenuItem key={option.value} value={option.value}>
-                            {option.value}
-                          </MenuItem>
-                        ))}
-                      </TextField>
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                      <Button 
-                        variant="contained" 
-                        color="primary" 
-                        style={{backgroundColor: '#c24914', color: "#bbbbbb", fontSize: 20}}
-                        onClick={onClick}
-                                        >
-                          Ajouter au panier
-                      </Button>
-                  </Grid>
-                  <Popover
-                    id={id1}
-                    open={open1}
-                    anchorEl={anchorEl1}
-                    onClose={handleClose1}
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'center',
-                    }}
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'center',
-                    }}>
-                        <Card className={classes.popup2} style={{backgroundColor: "#ffb26b"}}>
-                            <CardActionArea>
-                                <CardContent>
-                                    <Typography component="h6" style={{color: "#564a4a"}}>
-                                        Vous venez de réserver un séjour pour {name}. 
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                            <CardActions>
-                            <Grid   container
-                                    direction="row"
-                                    justify="space-around"
-                                    alignItems="center">
-                                <Button variant="outlined" 
-                                        size="medium" 
-                                        color="secondary" 
-                                        style={{color: "#810000"}}
-                                        component={ Link } 
-                                        to="/offers-page">
-                                Retour aux offres
-                                </Button>
-                                <Button variant="outlined" 
-                                        size="medium" 
-                                        color="primary" 
-                                        style={{color: "#150e56"}}
-                                        component={ Link } 
-                                        to="/shopping-cart">
-                                Voir le panier
-                                </Button>
-                            </Grid>
-                            </CardActions>
-                        </Card>
-                        
-            </Popover>
-              </Grid>
-
-            </CardContent>
-          </Card>
+        <Grid container
+              direction="row"
+              justify="center"
+              alignItems="center">
+              <Card className={classes.card}>
+                <CardContent>
+                  <AutoplaySlider
+                    className="aws-btn1"
+                    play={true}
+                    cancelOnInteraction={false} // should stop playing on user interaction
+                    interval={3000}
+                    bullets={false}
+                  >
+                    <div data-src={thisProduct.image1} />
+                    <div data-src={thisProduct.image2} />
+                    <div data-src={thisProduct.image3} />
+                  </AutoplaySlider>
+                    <Typography className={classes.height} variant="h4" component="p"></Typography>
+                    <Typography className={classes.description} variant="h4" component="p" style={{color: "#ffc764"}}>
+                      {name} 
+                    </Typography>
+                    <Typography className={classes.height} variant="h4" component="p"></Typography>
+                    <Typography className={classes.description} variant="body2" component="p" style={{color: "#939b62"}}>
+                      {thisProduct.description} 
+                    </Typography>
+                    <Typography className={classes.height} variant="h4" component="p"></Typography>
+                      <Grid container spacing={3} direction="column" alignItems="center">
+                        <Grid item xs={12} sm={6}>
+                            <Paper className={classes.paper}>Durée: {thisProduct.duration}</Paper>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <Paper className={classes.paper}>{thisProduct.price} €</Paper>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                              className={classes.input}
+                              type="number"
+                              variant="outlined"
+                              label="Choisir"
+                              InputProps={{ inputProps: { min: 1, max: 10 } }}
+                              value={productsNumber}
+                              onChange={ e => setProductsNumber(e.target.value)}
+                              helperText="Le nombre de passagers"
+                            >
+                            </TextField>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <Button 
+                              variant="contained" 
+                              color="primary" 
+                              style={{backgroundColor: '#c24914', color: "#bbbbbb", fontSize: 20}}
+                              onClick={onClick}>
+                              Ajouter au panier
+                            </Button>
+                        </Grid>
+                        <Popover
+                          id={id1}
+                          open={open1}
+                          anchorEl={anchorEl1}
+                          onClose={handleClose1}
+                          anchorOrigin={{
+                              vertical: 'bottom',
+                              horizontal: 'center',
+                          }}
+                          transformOrigin={{
+                              vertical: 'top',
+                              horizontal: 'center',
+                          }}>
+                            <Card style={{backgroundColor: "#ffb26b"}}>
+                                <CardActionArea>
+                                    <CardContent>
+                                        <Typography component="h6" style={{color: "#564a4a"}}>
+                                            Vous venez de réserver un séjour pour {name}. 
+                                        </Typography>
+                                    </CardContent>
+                                </CardActionArea>
+                                <CardActions>
+                                <Grid   container
+                                        direction="row"
+                                        justify="space-around"
+                                        alignItems="center">
+                                    <Button variant="outlined" 
+                                            size="medium" 
+                                            color="secondary" 
+                                            style={{color: "#810000"}}
+                                            component={ Link } 
+                                            to="/offers-page">
+                                            Retour aux offres
+                                    </Button>
+                                    <Button variant="outlined" 
+                                            size="medium" 
+                                            color="primary" 
+                                            style={{color: "#150e56"}}
+                                            component={ Link } 
+                                            to="/shopping-cart">
+                                            Voir le panier
+                                    </Button>
+                                </Grid>
+                                </CardActions>
+                            </Card>
+                        </Popover>
+                      </Grid>
+                </CardContent>
+              </Card>
         </Grid>
       </MuiThemeProvider>
     </div>

@@ -3,18 +3,6 @@ import "firebase/auth";
 import "firebase/firestore";
 import "firebase/storage";
 
-// const config = {
-//     apiKey: "AIzaSyAoXDWzq_7Rc-8AhCB8zNcpKwib7FgzBYo",
-//     authDomain: "divinestay-b4eee.firebaseapp.com",
-//     databaseURL: "https://divinestay-b4eee.firebaseio.com",
-//     projectId: "divinestay-b4eee",
-//     storageBucket: "divinestay-b4eee.appspot.com",
-//     messagingSenderId: "832597021128",
-//     appId: "1:832597021128:web:0232d215234e0066e770fd",
-//     measurementId: "G-K81QV5LDV3"
-// };
-
-
 const config = {
     apiKey: "AIzaSyAoXDWzq_7Rc-8AhCB8zNcpKwib7FgzBYo",
     authDomain: "divinestay-b4eee.firebaseapp.com",
@@ -52,13 +40,6 @@ class Firebase {
 
     //id utilisateur
     user = uid => this.db.doc(`users/${uid}`);
-
-    // travelData = (doc) => this.db.collection(doc); 
-    data = () => this.db.collection("users");
 };
-
-// const storage = app.storage();
-
-
 
 export default Firebase;

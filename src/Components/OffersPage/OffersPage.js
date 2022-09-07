@@ -6,7 +6,6 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 
 import SpaceTravel from "../Images/SpaceTravel.jpg";
-import SkyTravel from "../Images/SkyTravel.jpg";
 import TimeTravel from "../Images/TimeTravel.jpg";
 import Background2 from "../Images/stars01.jpg";
 
@@ -14,19 +13,13 @@ const images = [
     {
         src: `${SpaceTravel}`,
         title: 'Cosmos',
-        width: '33%',
+        width: '50%',
         link: "/space-travel"
-    },
-    {
-        src: `${SkyTravel}`,
-        title: 'Paradis & Enfers',
-        width: '34%',
-        link: "/heaven-travel"
     },
     {
         src: `${TimeTravel}`,
         title: 'Temps',
-        width: '33%',
+        width: '50%',
         link: "/time-travel"
     },
 ];
@@ -34,7 +27,7 @@ const images = [
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        flexWrap: 'wrap',
+        flexWrap: 'nowrap',
         minWidth: 300,
         width: "100%",
         height: "100vh",
@@ -110,42 +103,41 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ButtonBases() {
-    const classes = useStyles();
 
+    const classes = useStyles();
+    
 return (
         <div className={classes.root}>
-        {images.map((image) => (
-            <ButtonBase
-            component={ Link } 
-            to={image.link}
-            focusRipple
-            key={image.title}
-            className={classes.image}
-            focusVisibleClassName={classes.focusVisible}
-            style={{
-                width: image.width,
-            }}
-            >
-            <span
-                className={classes.imageSrc}
+            {images.map((image) => (
+                <ButtonBase
+                component={ Link } 
+                to={image.link}
+                focusRipple
+                key={image.title}
+                className={classes.image}
+                focusVisibleClassName={classes.focusVisible}
                 style={{
-                backgroundImage: `url(${image.src})`,
-                }}
-            />
-            <span className={classes.imageBackdrop} />
-            <span className={classes.imageButton}>
-                <Typography
-                component="span"
-                variant="subtitle1"
-                color="inherit"
-                className={classes.imageTitle}
-                >
-                {image.title}
-                <span className={classes.imageMarked} />
-                </Typography>
-            </span>
-            </ButtonBase>
-        ))}
+                    width: image.width,
+                }}>
+                    <span
+                        className={classes.imageSrc}
+                        style={{
+                        backgroundImage: `url(${image.src})`,
+                        }}
+                    />
+                    <span className={classes.imageBackdrop} />
+                    <span className={classes.imageButton}>
+                        <Typography
+                        component="span"
+                        variant="subtitle1"
+                        color="inherit"
+                        className={classes.imageTitle}>
+                            {image.title}
+                        <span className={classes.imageMarked} />
+                        </Typography>
+                    </span>
+                </ButtonBase>
+            ))}
         </div>
-);
+        );
 }

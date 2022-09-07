@@ -7,7 +7,6 @@ import { Provider } from "react-redux";
 import Home from "./Components/Home/Home.js";
 import ShopCard from "./Components/ShopCard/ShopCard.js";
 import SpaceTravel from "./Components/SpaceTravel/SpaceTravel";
-import HeavenTravel from "./Components/HeavenHellTravel/HeavenTravel";
 import TimeTravel from "./Components/TimeTravel/TimeTravel.js";
 import Navigation1 from "./Navigation1";
 import Profile from "./Components/Profile/Profile";
@@ -30,7 +29,6 @@ function App() {
             <Navigation1 />
           
               <Route exact path="/" component={Home} />
-              <Route path="/heaven-travel" component={HeavenTravel} />
               <Route path="/space-travel" component={SpaceTravel} />
               <Route path="/shop-card/:productId" component={ShopCard} />
               <Route path="/time-travel" component={TimeTravel} />

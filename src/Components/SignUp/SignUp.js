@@ -61,9 +61,6 @@ const useStyles = makeStyles({
             color: "#6bc5d2"
         }
     },
-    pos: {
-        marginBottom: 12,
-    },
     link: {
         color: "#da9833"
     },
@@ -92,7 +89,7 @@ export default function SignUp(props) {
         setLoginData({...loginData, [e.target.id]: e.target.value})
     };
 
-    const handleSubmit = (e) => {
+    function handleSubmit (e) {
         e.preventDefault();
         const { email, password, pseudo } = loginData;
         firebase.signupUser(email, password)
@@ -110,12 +107,12 @@ export default function SignUp(props) {
             setError(error);
             setLoginData({...data});
         })
-    }
+}
 
     const { pseudo, email, password, confirmPassword } = loginData;
 
     //gestion erreurs
-    const errorMsg = error !== "" && <span>{error.message}</span>
+    const errorMsg = error !== "" && <span>{error.message}</span>;
 
 return (
     <div className={classes.div}>

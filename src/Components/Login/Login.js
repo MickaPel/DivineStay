@@ -61,9 +61,6 @@ const useStyles = makeStyles({
             color: "#6bc5d2"
         }
     },
-    pos: {
-        marginBottom: 12,
-    },
     link: {
         color: "#da9833"
     },
@@ -74,6 +71,7 @@ const useStyles = makeStyles({
 });
 
 export default function Login(props) {
+    
     const classes = useStyles();
 
     const firebase = useContext(firebaseContext);
@@ -127,8 +125,7 @@ return (
                         variant="outlined"
                         type="email"
                         onChange={e => setEmail(e.target.value)}
-                        value={email}
-                    />
+                        value={email}/>
                     <TextField
                         className={classes.title1}
                         label="Mot de passe"
@@ -136,27 +133,26 @@ return (
                         autoComplete="off"
                         variant="outlined"
                         onChange={e => setPassword(e.target.value)}
-                        value={password}
-                    />
+                        value={password}/>
                 </CardContent>
                 <CardActions style={{justifyContent: 'center'}} >
-                    {button ? <Button size="large" 
-                                variant="outlined" 
-                                color="primary"
-                                onClick={handleSubmit}
-                                className={classes.button}>
-                                Conexion
+                    {button ?   <Button size="large" 
+                                    variant="outlined" 
+                                    color="primary"
+                                    onClick={handleSubmit}
+                                    className={classes.button}>
+                                    Conexion
                                 </Button>
-                            : <Button size="large" 
-                                variant="outlined" 
-                                color="primary"
-                                disabled
-                                className={classes.button}>
-                                Conexion
+                            :   <Button size="large" 
+                                    variant="outlined" 
+                                    color="primary"
+                                    disabled
+                                    className={classes.button}>
+                                    Conexion
                                 </Button>}
                 </CardActions>
                     <Link className={classes.link} to="/sign-up">Pas encore inscrit?</Link>
-                    <br/>
+                        <br/>
                     <Link className={classes.link} to="/forget-password">Mot de passe oublié?</Link>
             </Card>
         </Grid>

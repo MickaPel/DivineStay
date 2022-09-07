@@ -24,14 +24,7 @@ const useStyles = makeStyles((theme) => ({
         width: "100%",
         height: "100%",
         paddingTop: 10
-    },
-    text1: {
-        marginLeft: 10
-    },
-    text2: {
-        marginRight: 10
     }
-
 }));
 
 export default function Footer () {
@@ -51,16 +44,13 @@ export default function Footer () {
                                         <Typography component="h6" className={classes.text1}>
                                             divinestay6@gmail.com
                                         </Typography>
-                                        <Typography component="h6">
-                                            "Le voyage est le printemps du coeur."
-                                        </Typography>
                                         <Typography component="h6" className={classes.text2}>
                                             &copy; DivineStay, 2021
                                         </Typography>
                                     </Grid>
                                 </Paper>
                             </div>
-                        : <div className={classes.root2}>
+                        :   <div className={classes.root2}>
                                 <Paper className={classes.footer}>
                                     <Grid
                                     container
@@ -72,15 +62,11 @@ export default function Footer () {
                                             divinestay6@gmail.com
                                         </Typography>
                                         <Typography component="h6">
-                                            "Le voyage est le printemps du coeur."
-                                        </Typography>
-                                        <Typography component="h6">
                                             &copy; DivineStay, 2021
                                         </Typography>
                                     </Grid>
                                 </Paper>
                             </div>
-
     return (
         <div>{grid}</div> 
     );

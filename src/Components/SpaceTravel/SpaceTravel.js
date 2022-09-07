@@ -77,7 +77,7 @@ export default function SpaceTravel(props) {
             {Array.isArray(spaceOffers) &&
                   spaceOffers.map(forecast => (
                     <div key={forecast.id} className={classes.paper}>           
-                      <Card style={{backgroundColor: "#e5e5e5"}}>
+                      <Card style={{backgroundColor: "#E6D2AA"}}>
                         <CardActionArea>
                           <Link to={`/shop-card/${forecast.name}`} style={{ textDecoration: "none" }}>
                             <Slider { ...settings }>

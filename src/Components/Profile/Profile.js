@@ -1,9 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link } from "react-router-dom";
 import firebaseContext from "../firebase/context";
 
-import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
@@ -27,18 +25,22 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
         width: "60%",
-        backgroundColor: "#34656d"
+        backgroundColor: "transparent"
     },
     large: {
         width: theme.spacing(15),
         height: theme.spacing(15),
     },
     pseudo: {
-        color: "#ffcd3c"
+        color: "#ffcd3c",
+        paddingTop: 30
     },
     input: {
         display: 'none',
     },
+    logout: {
+        color: "C21010"
+    }
 }));
 
 export default function Profile(props) {
@@ -52,7 +54,9 @@ export default function Profile(props) {
 
     useEffect(() => {
         let listener = firebase.auth.onAuthStateChanged(user => {
-            user ? setUserSession(user) : props.history.push("/");
+            user ? setUserSession(user) : setTimeout (() => {
+                                            props.history.push("/");
+                                        }, 2000);
         })
 
         if (!!userSession) {
@@ -77,7 +81,9 @@ export default function Profile(props) {
 
         return userSession === null ? (
             <div className={classes.root}>
-                <Link to="/login">Vous n'êtes pas connecté</Link>
+                <Typography component="h6" style={{ color: "#ffcd3c" }}>
+                    Vous n'êtes pas connecté. Nous vous redirigeons vers la page d'acceuil.
+                </Typography>
             </div>
         ) : (
             <div className={classes.root}>
@@ -85,13 +91,9 @@ export default function Profile(props) {
                     justify="center" 
                     alignItems="center" 
                     direction="column">
-
-
-                    <Avatar justify="center" src="/static/images/avatar/1.jpg" alt="Remy Sharp" className={classes.large} />
-                    <Typography gutterBottom variant="h5" component="h2" className={classes.pseudo}>
-                        {userData.pseudo}
-                    </Typography>
-                    <Logout/>
+                        <Typography gutterBottom variant="h5" component="h2" className={classes.pseudo}>
+                            Bonjour {userData.pseudo}
+                        </Typography>
                         <Grid container  
                         justify="center" 
                         alignItems="center" 
@@ -109,7 +111,8 @@ export default function Profile(props) {
                                     Pseudo: {userData.pseudo}
                                 </Typography>
                             </Paper>
-                </Grid>
+                        </Grid>
+                    <Logout/>
                 </Grid>
             </div>
         );
